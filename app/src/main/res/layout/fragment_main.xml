@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+
+       <ImageView
+           android:layout_width="match_parent"
+           android:layout_height="200dp"
+           android:scaleType="fitXY"
+           android:src="@drawable/vidhyaklogo"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Public's Information"
+            android:gravity="center"
+            android:textColor="#00a65a"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:background="#fc354c"/>
+
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Ritesh"-->
+            <!--android:textSize="30sp"-->
+            <!--android:textColor="#522ea9"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:fontFamily="serif"-->
+            <!--android:id="@+id/stud_name"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--/>-->
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/pendrequest_btn"
+                android:layout_width="0dip"
+                android:layout_height="80dp"
+                android:text="Pending Request"
+               android:layout_margin="5dp"
+                android:background="@drawable/btn"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/inprogressrequest_btn"
+                android:layout_width="0dip"
+                android:layout_height="80dp"
+                 android:layout_margin="5dp"
+                android:text="InProgress Request"
+                android:background="@color/colorPrimary"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/completedrequest_btn"
+                android:layout_width="0dip"
+                android:layout_height="80dp"
+                android:text="Completedd Request"
+                 android:layout_margin="5dp"
+                android:background="@android:color/holo_red_dark"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/pendstory_btn"
+                android:layout_width="0dip"
+                android:layout_height="80dp"
+                 android:layout_margin="5dp"
+                android:text="Pending Story"
+                android:background="@color/colorAccent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/approvedstory_btn"
+                android:layout_width="0dip"
+                android:layout_height="80dp"
+                 android:layout_margin="5dp"
+                android:text="Approved Story"
+                android:background="@android:color/holo_purple"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/disapprovedstory_btn"
+                android:layout_width="0dip"
+                android:text="Disapproved Story"
+                android:layout_height="80dp"
+                 android:layout_margin="5dp"
+                android:background="@drawable/btn1"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:orientation="horizontal"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/updatelocation_btn"
+                android:layout_width="0dip"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:text="Update Location"
+                android:background="#3cd2ad"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/polling_btn"
+                android:layout_width="0dip"
+                android:text="Create Poliing"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                android:background="#00e676"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
