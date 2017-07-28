@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_approved_story"
+    android:id="@+id/activity_reject_request"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="fujitsu.vidhayak.vidhayakjeeeditor.InternalActivity.ApprovedStory">
+android:orientation="vertical"
+
+    tools:context="fujitsu.vidhayak.vidhayakjeeeditor.InternalActivity.RejectRequest">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -22,17 +24,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Approved Story"
+            android:text="Reason Section"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#ffffff" />
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="8dp">
+        <EditText
+            android:id="@+id/resontxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Please Give The Reason"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn"
+        android:textColor="#ffffff"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:layout_gravity="center"
+        android:text="Submit"/>
 
 </LinearLayout>

@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cn.iwgang.countdownview.CountdownView;
+import fujitsu.vidhayak.vidhayakjeeeditor.FCM.tokensave;
 
 public class Verifyotp extends AppCompatActivity implements View.OnClickListener {
 
@@ -154,7 +155,7 @@ public class Verifyotp extends AppCompatActivity implements View.OnClickListener
     private void verifyotp() {
 
 
-        final String macid = "abc";
+        final String macid = tokensave.getInstance(this).getDeviceToken();
         Log.d("mc00", "macid11" + macid);
         final String KEY_mobile = "otp";
         final String KEY_mac = "token";

@@ -1,6 +1,7 @@
 package fujitsu.vidhayak.vidhayakjeeeditor.InternalActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -60,16 +61,16 @@ public class DisapprovedStory extends AppCompatActivity implements View.OnClickL
                 new RecyclerTouchListener(getApplicationContext(), new RecyclerTouchListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
 
-//                        Movie mo123 = movieList.get(position);
-//
-//                        Intent newsdetailintnt = new Intent(getApplicationContext(),NewsDetail.class);
-//                        newsdetailintnt.putExtra("type",mo123.getYear());
-//                        newsdetailintnt.putExtra("headline",mo123.getTitle());
-//                        newsdetailintnt.putExtra("content",mo123.getRating());
-//                        newsdetailintnt.putExtra("image",mo123.getThumbnailUrl());
-//                        newsdetailintnt.putExtra("id",mo123.getId());
-//                        newsdetailintnt.putExtra("caption",mo123.getCaption());
-//                        startActivity(newsdetailintnt);
+                        Movie mo123 = movieList.get(position);
+
+                        Intent newsdetailintnt = new Intent(getApplicationContext(),StoryDetailTwo.class);
+                        //   newsdetailintnt.putExtra("type",mo123.getYear());
+                        newsdetailintnt.putExtra("title",mo123.getTitle());
+                        newsdetailintnt.putExtra("description",mo123.getRating());
+                        newsdetailintnt.putExtra("image",mo123.getThumbnailUrl());
+                        newsdetailintnt.putExtra("id",mo123.getId());
+                        //    newsdetailintnt.putExtra("caption",mo123.getCaption());
+                        startActivity(newsdetailintnt);
 
 
                         // TODO Handle item click

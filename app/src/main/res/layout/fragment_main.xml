@@ -24,10 +24,10 @@
             android:layout_height="wrap_content"
             android:text="Public's Information"
             android:gravity="center"
-            android:textColor="#00a65a"
+            android:textColor="#ffffff"
             android:textSize="20dp"
             android:padding="10dp"
-            android:background="#fc354c"/>
+            android:background="#222d32"/>
 
 
         <!--<TextView-->
@@ -58,7 +58,8 @@
                 android:layout_height="80dp"
                 android:text="Pending Request"
                android:layout_margin="5dp"
-                android:background="@drawable/btn"
+                android:background="@drawable/btn2"
+                android:textColor="#ffffff"
                 android:layout_weight="1" />
 
             <Button
@@ -67,7 +68,8 @@
                 android:layout_height="80dp"
                  android:layout_margin="5dp"
                 android:text="InProgress Request"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/btn2"
+                android:textColor="#ffffff"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -81,9 +83,10 @@
                 android:id="@+id/completedrequest_btn"
                 android:layout_width="0dip"
                 android:layout_height="80dp"
-                android:text="Completedd Request"
+                android:text="Completed Request"
                  android:layout_margin="5dp"
-                android:background="@android:color/holo_red_dark"
+                android:background="@drawable/btn2"
+                android:textColor="#ffffff"
                 android:layout_weight="1" />
 
             <Button
@@ -92,7 +95,8 @@
                 android:layout_height="80dp"
                  android:layout_margin="5dp"
                 android:text="Pending Story"
-                android:background="@color/colorAccent"
+                android:background="@drawable/btn2"
+                android:textColor="#ffffff"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -108,7 +112,8 @@
                 android:layout_height="80dp"
                  android:layout_margin="5dp"
                 android:text="Approved Story"
-                android:background="@android:color/holo_purple"
+                android:background="@drawable/btn2"
+                android:textColor="#ffffff"
                 android:layout_weight="1" />
 
             <Button
@@ -117,7 +122,8 @@
                 android:text="Disapproved Story"
                 android:layout_height="80dp"
                  android:layout_margin="5dp"
-                android:background="@drawable/btn1"
+                android:background="@drawable/btn2"
+                android:textColor="#ffffff"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -133,16 +139,18 @@
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
                 android:text="Update Location"
-                android:background="#3cd2ad"
+                android:background="@drawable/btn2"
+                android:textColor="#ffffff"
                 android:layout_weight="1" />
 
             <Button
                 android:id="@+id/polling_btn"
                 android:layout_width="0dip"
-                android:text="Create Poliing"
+                android:text="Create Polliing"
                 android:layout_height="80dp"
                 android:layout_margin="5dp"
-                android:background="#00e676"
+                android:background="@drawable/btn2"
+                android:textColor="#ffffff"
                 android:layout_weight="1" />
         </LinearLayout>
 

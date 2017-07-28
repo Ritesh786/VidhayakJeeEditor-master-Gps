@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
+    >
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_polling"
@@ -29,4 +36,67 @@
 
     </RelativeLayout>
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/request_title"
+            android:textColor="#003973"
+            android:hint="Topic"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/request_description"
+            android:textColor="#003973"
+            android:layout_marginTop="20dp"
+            android:maxLines="10000"
+            android:hint="Question"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/chooseimage_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn"
+        android:textColor="#ffffff"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:text="ChooseImage"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/requst_Image"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="10dp"
+        android:maxWidth="420dp"
+        android:maxHeight="420dp"
+        android:scaleType="fitCenter"/>
+
+    <Button
+        android:id="@+id/uploadrequst_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn"
+        android:layout_marginTop="40dp"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:text="Upload Question"
+        android:layout_gravity="center"/>
+
 </LinearLayout>
+</ScrollView>

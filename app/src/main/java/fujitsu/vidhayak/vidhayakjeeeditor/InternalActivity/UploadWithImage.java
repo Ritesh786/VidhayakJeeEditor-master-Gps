@@ -38,116 +38,111 @@ import fujitsu.vidhayak.vidhayakjeeeditor.CameraPackage.CameraActivity;
 import fujitsu.vidhayak.vidhayakjeeeditor.CameraPackage.CropImage;
 import fujitsu.vidhayak.vidhayakjeeeditor.CameraPackage.GlobalVariables;
 import fujitsu.vidhayak.vidhayakjeeeditor.CameraPackage.UtilityClass;
+import fujitsu.vidhayak.vidhayakjeeeditor.DashBoard;
 import fujitsu.vidhayak.vidhayakjeeeditor.R;
 
-public class PollingActivity extends AppCompatActivity implements View.OnClickListener {
+public class UploadWithImage extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView mbackimage;
 
-    EditText mrequesttitle,mrequestdewscrition;
-    Button mchooseimagebtn,muploadrequstbtn;
+    EditText mtitle,mdescription;
+    String title,description,id,image;
 
-    ImageView mrequstimage;
-    private Bitmap bitmap;
-    AlertDialog dialog;
-    String strtim;
-
+    Button mchooseimagebtn,muploadnewsbtn;
     private int PICK_IMAGE_REQUEST = 1;
+    private static final int PICK_CROPIMAGE = 4;
+    private Bitmap bitmap;
+    String strtim;
+    AlertDialog dialog;
     private int CAMERA_REQUEST = 2;
 
-  //  public static final String KEY_ID= "user_id";
-    public static final String KEY_TITLE = "topic";
-    public static final String KEY_question = "question";
-    public static final String KEY_IMAGE = "image";
+    public static final String KEY_ID= "id";
+    public static final String KEY_title = "title";
+    public static final String KEY_CONTENT = "content";
+    // public static final String KEY_TYPE = "category";
+     public static final String KEY_IMAGE = "image";
+    // public static final String KEY_CAPTION = "caption";
+ImageView mnewsimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_polling);
+        setContentView(R.layout.activity_upload_with_image);
 
-        mbackimage = (ImageView) findViewById(R.id.back_imageverified);
-        mbackimage.setOnClickListener(this);
+        mtitle = (EditText) findViewById(R.id.titletxt);
+        mdescription = (EditText) findViewById(R.id.descriptiontxt);
 
-        mrequesttitle = (EditText) findViewById(R.id.request_title);
-        mrequestdewscrition = (EditText) findViewById(R.id.request_description);
+        mnewsimage = (ImageView) findViewById(R.id.news_Image);
 
         mchooseimagebtn = (Button) findViewById(R.id.chooseimage_btn);
-        muploadrequstbtn = (Button) findViewById(R.id.uploadrequst_btn);
-
-        mrequstimage = (ImageView) findViewById(R.id.requst_Image);
+        muploadnewsbtn = (Button) findViewById(R.id.uploadnews_btn);
 
         mchooseimagebtn.setOnClickListener(this);
-        muploadrequstbtn.setOnClickListener(this);
+        muploadnewsbtn.setOnClickListener(this);
 
+        Intent intent = getIntent();
+        description = intent.getStringExtra("description");
+        title = intent.getStringExtra("title");
+        id = intent.getStringExtra("id");
+        image = intent.getStringExtra("image");
+        //    image = intent.getStringExtra("image");
+
+        mtitle.setText(title);
+        mdescription.setText(description);
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
 
-        if(v == mbackimage){
+        switch (view.getId()) {
 
-            PollingActivity.this.finish();
+            case R.id.chooseimage_btn:
+
+                AlertDialog.Builder mbuilder = new AlertDialog.Builder(UploadWithImage.this);
+                View mview =getLayoutInflater().inflate(R.layout.chooseimage, null);
+                Button mtakephoto = (Button) mview.findViewById(R.id.imagebycamera);
+                mtakephoto.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent cameraIntent = new Intent(UploadWithImage.this,CameraActivity.class);
+                        cameraIntent.putExtra(GlobalVariables.FILENAME,GlobalVariables.profilepic_name);
+                        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+
+
+                    }
+                });
+
+                Button mtakegallery = (Button) mview.findViewById(R.id.imagebygallery);
+                mtakegallery.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        showfilechooser();
+
+                    }
+                });
+                mbuilder.setView(mview);
+                dialog = mbuilder.create();
+                dialog.show();
+
+                break;
+
+            case R.id.uploadnews_btn:
+
+                uploadImage();
+
+                break;
+
+
         }
-
-        if(v == mchooseimagebtn){
-
-            AlertDialog.Builder mbuilder = new AlertDialog.Builder(PollingActivity.this);
-            View mview = getLayoutInflater().inflate(R.layout.chooseimage, null);
-            Button mtakephoto = (Button) mview.findViewById(R.id.imagebycamera);
-            mtakephoto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent cameraIntent = new Intent(PollingActivity.this,CameraActivity.class);
-                    cameraIntent.putExtra(GlobalVariables.FILENAME, GlobalVariables.profilepic_name);
-                    startActivityForResult(cameraIntent, CAMERA_REQUEST);
-
-                }
-            });
-
-            Button mtakegallery = (Button) mview.findViewById(R.id.imagebygallery);
-            mtakegallery.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    showFileChooser();
-
-                }
-            });
-            mbuilder.setView(mview);
-            dialog = mbuilder.create();
-            dialog.show();
-        }
-
-        if(v == muploadrequstbtn){
-            uploadImage();
-        }
-
-
     }
 
+    public void showfilechooser(){
 
-    private void showFileChooser() {
-        try {
-            if (android.os.Build.VERSION.SDK_INT >= 23) {
-
-                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, PICK_IMAGE_REQUEST);
-
-
-            } else {
-
-                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                i.setType("image/*");
-                i.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(i, ""), PICK_IMAGE_REQUEST);
-
-            }
-        }catch (Exception e){
-
-            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
-        }
-
+        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(i, ""), PICK_IMAGE_REQUEST);
     }
 
     public String getStringImage(Bitmap bmp){
@@ -158,42 +153,47 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
         return encodedImage;
     }
 
+
     public void uploadImage() {
 
 
-      //  final String userid = String.valueOf(SaveUserId.getInstance(UploadStory.this).getUserId());
-        final String title = mrequesttitle.getText().toString().trim();
-        final String description = mrequestdewscrition.getText().toString().trim();
+        final String title = mtitle.getText().toString().trim();
+        final String description = mdescription.getText().toString().trim();
         final String image = getStringImage(bitmap);
 
 
         String url = null;
-        String REGISTER_URL = "http://minews.in/lumen1/public/poll/create";
+        String REGISTER_URL = "http://minews.in/lumen1/public/story/edit/";
+        String newurl = REGISTER_URL+id;
 
-        REGISTER_URL = REGISTER_URL.replaceAll(" ", "%20");
+        newurl = newurl.replaceAll(" ", "%20");
         try {
-            URL sourceUrl = new URL(REGISTER_URL);
+            URL sourceUrl = new URL(newurl);
             url = sourceUrl.toString();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        final ProgressDialog loading = ProgressDialog.show(PollingActivity.this, "Uploading...", "Please wait...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(UploadWithImage.this, "Uploading...", "Please wait...", false, false);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                    //    Log.d("jaba", userid);
+                        Log.d("jabaed", id);
                         try {
                             JSONObject jsonresponse = new JSONObject(response);
                             boolean success = jsonresponse.getBoolean("success");
 
                             if (success) {
 
-                                PollingActivity.this.finish();
+                                Intent successin = new Intent(UploadWithImage.this,DashBoard.class);
+                                successin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                successin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(successin);
+                                UploadWithImage.this.finish();
 
                             } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(PollingActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(UploadWithImage.this);
                                 builder.setMessage("Upoading Failed")
                                         .setNegativeButton("Retry", null)
                                         .create()
@@ -204,18 +204,18 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        //  Log.d("jabadi", headline);
+                        Log.d("jabadi", id);
                         loading.dismiss();
-                        Toast.makeText(PollingActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(UploadWithImage.this, response.toString(), Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                     //   Log.d("bada123", userid);
+                        Log.d("bada123ed", id);
 
                         loading.dismiss();
-                        Toast.makeText(PollingActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(UploadWithImage.this, error.toString(), Toast.LENGTH_LONG).show();
                         Log.d("error1234", error.toString());
 
                     }
@@ -226,9 +226,8 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 //Adding parameters to request
-              //  params.put(KEY_ID, userid);
-                params.put(KEY_TITLE, title);
-                params.put(KEY_question, description);
+                params.put(KEY_title, title);
+                params.put(KEY_CONTENT, description);
                 params.put(KEY_IMAGE, image);
                 return params;
 
@@ -246,19 +245,17 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
         );
 
 
-        RequestQueue requestQueue = Volley.newRequestQueue(PollingActivity.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(UploadWithImage.this);
         requestQueue.add(stringRequest);
-
     }
 
-
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         try{
-            // Log.d("try4",str);
+        //    Log.d("try4",str);
             super.onActivityResult(requestCode, resultCode, data);}catch (Exception e) {
             Log.d("try8", e.toString());
-            //   Toast.makeText(getContext(), "On super " + e.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "On super " + e.toString(), Toast.LENGTH_LONG).show();
 
         }
 
@@ -281,11 +278,11 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
 
             if(data==null){
 
-                Toast.makeText(PollingActivity.this," Please Select Image For Uploading.... ",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext()," Please Select Image For Uploading.... ",Toast.LENGTH_LONG).show();
 
             }else {
                 Uri filePath = data.getData();
-                Intent intentcrop = new Intent(PollingActivity.this, CropImage.class);
+                Intent intentcrop = new Intent(getApplicationContext(), CropImage.class);
                 intentcrop.putExtra("ramji", filePath.toString());
                 startActivityForResult(intentcrop, 6);
             }
@@ -312,7 +309,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
 //                startActivityForResult(intentcrop, PICK_CROPIMAGE);
 //            }
             bitmap =  UtilityClass.getImage(GlobalVariables.profilepic_name);
-            mrequstimage.setImageBitmap(bitmap);
+            mnewsimage.setImageBitmap(bitmap);
             dialog.dismiss();
 
 
@@ -324,12 +321,12 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
             Log.d("imageindash","imageindd "+strtim);
             bitmap = StringToBitMap(strtim);
             Log.d("imageinbitmap","imageinbit "+bitmap);
-            mrequstimage.setImageBitmap(bitmap);
+            mnewsimage.setImageBitmap(bitmap);
             dialog.dismiss();
 
         }
-
     }
+
 
     public Bitmap StringToBitMap(String encodedString) {
         try {
@@ -342,5 +339,7 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
             return null;
         }
     }
+
+
 
 }
